@@ -4,23 +4,27 @@ alpha_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
 
 
 def is_palindrome(sentence):
-    for char in sentence:
-        if char in alpha_list:
-            if len(sentence) <= 1:
+    while sentence[0:]:
+        for char in sentence:
+            if char in alpha_list:
+                if len(sentence) <= 1:
+                    return True
+                elif sentence[0] == sentence[-1]:
+                    sentence.pop(0)
+                    sentence.pop(- 1)
+                    is_palindrome(sentence)
+                else:
+                    return False
                 return True
-            if sentence[0] != sentence[-1]:
+            else:
                 return False
-            return is_palindrome(sentence[1:-1])
-        else:
-            return False
-    return True
 
 
 def main():
     sentence = input("\nEnter some text to determine if it is a palindrome: ")
     sentence = sentence.replace(" ", "")
+    sentence = list(sentence.lower())
     print(is_palindrome(sentence))
-
 
 if __name__ == '__main__':
     main()
