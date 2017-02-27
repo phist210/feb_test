@@ -2,20 +2,20 @@ import re
 
 
 def is_palindrome(sentence):
-    sentence = sentence.lower()
-    if len(sentence) >= 1:
-        if sentence == '':
-            return True
-        if sentence[0] == sentence[-1]:
-            return True
-        else:
-            return False
-    return is_palindrome(sentence[1:-1])
+    sentence = re.sub('\W+', '', sentence.lower())
+    if not sentence:
+        return True
+    first = sentence[0]
+    last = sentence[-1]
+    rest = sentence[1:-1]
+    if first == last:
+        return is_palindrome(rest)
+    else:
+        return False
 
 
 def main():
     sentence = input("\nEnter some text to determine if it is a palindrome: ")
-    sentence = re.sub('\W+', '', sentence)
     print(is_palindrome(sentence))
 
 
